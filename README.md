@@ -103,7 +103,7 @@ await cms.trackLead({
 await cms.trackLead({
   eventName: "email_verified",
   customerExternalId: "user_42",
-  mode: "deferred",
+  mode: "",
 });
 ```
 

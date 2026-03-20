@@ -1,0 +1,54 @@
+{
+  "name": "cms-ts",
+  "version": "1.0.0",
+  "description": "Official TypeScript SDK for CutMeShort CMS API",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "require": "./dist/src/index.js",
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest",
+    "audit": "npm audit --audit-level=moderate",
+    "security-check": "npm audit && npm ls"
+  },
+  "keywords": [
+    "cutmeshort",
+    "cms",
+    "sdk",
+    "typescript",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vigneshreddy/cms-sdk.git"
+  },
+  "homepage": "https://github.com/vigneshreddy/cms-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/vigneshreddy/cms-sdk/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Vignesh Reddy",
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.18"
+  }
+}

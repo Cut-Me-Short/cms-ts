@@ -158,9 +158,6 @@ export const ERROR_MESSAGES = {
   CUSTOMER_EMAIL_INVALID: "customerEmail must be a valid email",
   CUSTOMER_EMAIL_TOO_LONG: `customerEmail must not exceed ${VALIDATION_CONSTRAINTS.STRING_FIELDS.CUSTOMER_EMAIL.MAX} characters`,
 
-  // Avatar errors
-  CUSTOMER_AVATAR_INVALID: "customerAvatar must be a valid URL",
-
   // Invoice ID errors
   INVOICE_ID_REQUIRED: "invoiceId is required",
   INVOICE_ID_TOO_LONG: `invoiceId must not exceed ${VALIDATION_CONSTRAINTS.STRING_FIELDS.INVOICE_ID.MAX} characters`,

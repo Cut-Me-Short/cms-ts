@@ -77,10 +77,6 @@ export const LeadPayloadSchema = z.object({
     .email(ERROR_MESSAGES.CUSTOMER_EMAIL_INVALID)
     .max(VALIDATION_CONSTRAINTS.STRING_FIELDS.CUSTOMER_EMAIL.MAX, ERROR_MESSAGES.CUSTOMER_EMAIL_TOO_LONG)
     .optional(),
-  customerAvatar: z
-    .string()
-    .url(ERROR_MESSAGES.CUSTOMER_AVATAR_INVALID)
-    .optional(),
   mode: z
     .enum(["deferred"])
     .optional(),

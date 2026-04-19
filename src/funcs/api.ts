@@ -32,10 +32,6 @@ export type TrackLeadRequest =
          * Optional customer email address.
          */
         'customerEmail'?: string;
-        /**
-         * Optional URL to a customer avatar image.
-         */
-        'customerAvatar'?: string;
     }
     | {
         /**
@@ -47,7 +43,7 @@ export type TrackLeadRequest =
         /**
          * Unique User ID. Used for deduplication (user cannot signup twice).
          */
-        'mode': 'deferred';
+        'mode'?: 'deferred';
         /**
          * Optional event timestamp in ISO 8601 format.
          */
@@ -64,10 +60,6 @@ export type TrackLeadRequest =
          * Optional customer email address.
          */
         'customerEmail'?: string;
-        /**
-         * Optional URL to a customer avatar image.
-         */
-        'customerAvatar'?: string;
     };
 export interface TrackResponse {
     'status'?: string;
@@ -94,10 +86,6 @@ export interface TrackSaleRequest {
      * Optional customer email address.
      */
     'customerEmail'?: string;
-    /**
-     * Optional URL to a customer avatar image.
-     */
-    'customerAvatar'?: string;
     /**
      * Unique Transaction ID. Used for deduplication (charge cannot happen twice).
      */

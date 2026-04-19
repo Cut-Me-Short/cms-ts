@@ -1,6 +1,6 @@
-# cms-ts
+# cutmeshort
 
-[![npm version](https://img.shields.io/npm/v/cms-ts)](https://www.npmjs.com/package/cms-ts)
+[![npm version](https://img.shields.io/npm/v/cutmeshort)](https://www.npmjs.com/package/cutmeshort)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js 18+](https://img.shields.io/badge/Node.js-18%2B-green)](https://nodejs.org/)
 
@@ -19,7 +19,7 @@ Official TypeScript/JavaScript SDK for the CutMeShort CMS API. Track leads and s
 ## Install
 
 ```bash
-npm install cms-ts
+npm install cutmeshort
 ```
 
 ## Requirements
@@ -41,7 +41,7 @@ import fetch, { Headers, Request, Response } from "cross-fetch";
 ## Quick Start
 
 ```ts
-import { CMS } from "cms-ts";
+import { CMS } from "cutmeshort";
 
 const cms = new CMS({
   apiKey: process.env.CMS_API_KEY!,
@@ -62,7 +62,7 @@ console.log(response);
 ### `cms.trackLead(leadData, options?)`
 
 ```ts
-import { CMS } from "cms-ts";
+import { CMS } from "cutmeshort";
 
 const cms = new CMS({ apiKey: "sk_live_xxx" });
 
@@ -80,14 +80,13 @@ Lead payload fields:
 - `timestamp?: string` (ISO 8601, e.g. `new Date().toISOString()`)
 - `customerName?: string`
 - `customerEmail?: string`
-- `customerAvatar?: string`
 
 #### Deferred mode (two-step lead attribution)
 
 If you can’t reliably send the `clickId` at the moment you want to record a lead event, you can use **deferred mode**:
 
 ```ts
-import { CMS } from "cms-ts";
+import { CMS } from "cutmeshort";
 
 const cms = new CMS({ apiKey: "xxx" });
 
@@ -103,14 +102,13 @@ await cms.trackLead({
 await cms.trackLead({
   eventName: "email_verified",
   customerExternalId: "user_42",
-  mode: "",
 });
 ```
 
 ### `cms.trackSale(saleData, options?)`
 
 ```ts
-import { CMS } from "cms-ts";
+import { CMS } from "cutmeshort";
 
 const cms = new CMS({ apiKey: "xxx" });
 
@@ -131,7 +129,6 @@ Sale payload fields:
 - `customerExternalId: string`
 - `customerName?: string`
 - `customerEmail?: string`
-- `customerAvatar?: string`
 - `invoiceId: string`
 - `amount: number` (in cents)
 - `currency: string` (3-letter code, e.g. `USD`)
@@ -167,7 +164,7 @@ Defaults:
 You can override retry/timeout settings for a specific call:
 
 ```ts
-import { CMS } from "cms-ts";
+import { CMS } from "cutmeshort";
 
 const cms = new CMS({ apiKey: "sk_live_xxx" });
 
@@ -193,7 +190,7 @@ The SDK provides specific error classes for different failure scenarios. Catch a
 import { 
   CMS, 
   CMSAPIError
-} from "cms-ts";
+} from "cutmeshort";
 
 const cms = new CMS({ apiKey: process.env.CMS_API_KEY });
 
@@ -264,7 +261,7 @@ import {
   type LeadPayload,
   type SalePayload,
   type RequestOptions 
-} from "cms-ts";
+} from "cutmeshort";
 
 // Config is validated at initialization
 const config: CMSConfig = {

@@ -13,7 +13,7 @@ export const SDK_VERSION = "1.0.0";
 // ============================================================================
 export const API_CONFIG = {
   /** Default base URL for the CMS API */
-  BASE_URL: "https://www.cutmeshort.com",
+  BASE_URL: "https://www.api.cme.sh",
 
   /** Default timeout in milliseconds for HTTP requests */
   TIMEOUT_MS: 10_000,
@@ -24,7 +24,7 @@ export const API_CONFIG = {
 // ============================================================================
 export const RETRY_CONFIG = {
   /** Default maximum number of retry attempts for transient failures */
-  MAX_RETRIES: 2,
+  MAX_RETRIES: 3,
 
   /** Default base delay (in ms) between retries for transient failures */
   DELAY_MS: 500,

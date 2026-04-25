@@ -68,7 +68,7 @@ export interface TrackSaleRequest {
     /**
      * The `dub_id` from the cookie.
      */
-    'clickId': string;
+    'clickId'?: string;
     'eventName': string;
     /**
      * Optional event timestamp in ISO 8601 format.
@@ -91,7 +91,7 @@ export interface TrackSaleRequest {
      */
     'invoiceId': string;
     /**
-     * The value of the sale in cents.
+        * The value of the sale (for example, `49.99`).
      */
     'amount': number;
     /**

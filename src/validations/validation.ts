@@ -100,7 +100,6 @@ export const SalePayloadSchema = z.object({
     .max(VALIDATION_CONSTRAINTS.STRING_FIELDS.INVOICE_ID.MAX, ERROR_MESSAGES.INVOICE_ID_TOO_LONG),
   amount: z
     .number()
-    .int()
     .min(VALIDATION_CONSTRAINTS.AMOUNT.MIN, ERROR_MESSAGES.AMOUNT_NEGATIVE),
   currency: z
     .string()
@@ -127,10 +126,7 @@ export const SalePayloadSchema = z.object({
     .string()
     .email(ERROR_MESSAGES.CUSTOMER_EMAIL_INVALID)
     .max(VALIDATION_CONSTRAINTS.STRING_FIELDS.CUSTOMER_EMAIL.MAX, ERROR_MESSAGES.CUSTOMER_EMAIL_TOO_LONG)
-    .optional(),
-  mode: z
-    .enum(["deferred"])
-    .optional(),
+    .optional()
 });
 
 export type SalePayloadInput = z.infer<typeof SalePayloadSchema>;

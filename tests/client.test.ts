@@ -72,7 +72,22 @@ describe("CMS", () => {
       customerExternalId: "user_42",
       eventName: "purchase_completed",
       invoiceId: "inv_987",
-      amount: 4999,
+      amount: 49.99,
+      currency: "USD",
+    });
+
+    expect(res).toEqual({ status: "ok" });
+    expect((globalThis as any).fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("supports sale tracking without clickId", async () => {
+    const sdk = createSdk();
+
+    const res = await sdk.trackSale({
+      customerExternalId: "user_42",
+      eventName: "purchase_completed",
+      invoiceId: "inv_988",
+      amount: 49.99,
       currency: "USD",
     });
 

@@ -1,5 +1,5 @@
 {
-  "name": "cms-ts",
+  "name": "cutmeshort",
   "version": "1.0.0",
   "description": "Official TypeScript SDK for CutMeShort CMS API",
   "main": "dist/src/index.js",

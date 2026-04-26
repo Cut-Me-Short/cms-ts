@@ -113,51 +113,23 @@ import { CMS } from "cutmeshort";
 const cms = new CMS({ apiKey: "xxx" });
 
 await cms.trackSale({
-  clickId: "id_123",
   customerExternalId: "user_123",
   eventName: "purchase_completed",
   invoiceId: "inv_987",
-  amount: 4999,
+  amount: 49.99,
   currency: "USD",
 });
 ```
 
 Sale payload fields:
-- `clickId: string`
 - `eventName: string`
 - `timestamp?: string` (ISO 8601, e.g. `new Date().toISOString()`)
 - `customerExternalId: string`
 - `customerName?: string`
 - `customerEmail?: string`
 - `invoiceId: string`
-- `amount: number` (in cents)
+- `amount: number` (for example, `49.99`)
 - `currency: string` (3-letter code, e.g. `USD`)
-
-## Configuration
-
-`new CMS(config)` accepts:
-
-```ts
-type CMSConfig = {
-  apiKey: string;
-  baseUrl?: string;
-  timeout?: number;
-  maxRetries?: number;
-  retryDelayMs?: number;
-  retryMaxDelayMs?: number;
-  retryOnStatuses?: number[];
-  retryOnNetworkError?: boolean;
-};
-```
-
-Defaults:
-- `baseUrl`: `https://www.cutmeshort.com`
-- `timeout`: `10000`
-- `maxRetries`: `2`
-- `retryDelayMs`: `500`
-- `retryMaxDelayMs`: `10000`
-- `retryOnStatuses`: `[429, 500, 502, 503, 504]`
-- `retryOnNetworkError`: `true`
 
 ## Per-request Overrides
 
@@ -238,7 +210,7 @@ The SDK automatically retries transient failures with exponential backoff:
 ```ts
 const cms = new CMS({
   apiKey: process.env.CMS_API_KEY,
-  maxRetries: 2,           // default: 2
+  maxRetries: 3,           // default: 3
   retryDelayMs: 500,       // initial delay: 500ms
   retryMaxDelayMs: 10000,  // max delay cap: 10s
   retryOnNetworkError: true,

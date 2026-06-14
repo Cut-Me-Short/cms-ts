@@ -4,7 +4,6 @@ import { CMS, type CMSConfig } from "../src/client";
 function createSdk(overrides: Partial<CMSConfig> = {}) {
   return new CMS({
     apiKey: "sk_test_1234567890abcdefghij",
-    timeout: 1000,
     ...overrides,
   });
 }
@@ -92,6 +91,26 @@ describe("CMS", () => {
     });
 
     expect(res).toEqual({ status: "ok" });
+    expect((globalThis as any).fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it("normalizes DOMException AbortError without mutating read-only code", async () => {
+    const sdk = createSdk({ maxRetries: 0 });
+
+    const abortError = new DOMException("The operation was aborted", "AbortError");
+    (globalThis as any).fetch = vi.fn().mockRejectedValue(abortError);
+
+    await expect(
+      sdk.trackLead({
+        clickId: "dub_123",
+        eventName: "signup_started",
+        customerExternalId: "user_42",
+      })
+    ).rejects.toMatchObject({
+      message: expect.stringContaining("Timeout Error"),
+      type: "timeout_error",
+    });
+
     expect((globalThis as any).fetch).toHaveBeenCalledTimes(1);
   });
 });

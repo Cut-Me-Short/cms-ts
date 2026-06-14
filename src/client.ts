@@ -1,6 +1,5 @@
 // src/client.ts
 import { EventsApi, Configuration, TrackLeadRequest, TrackSaleRequest } from "./funcs";
-import type { RequestOptions as GeneratedRequestOptions } from "./funcs/base";
 import { handleApiError } from "./errors";
 import { validateLeadPayload, validateSalePayload, validateCMSConfig } from "./validations/validation";
 import { SDK_VERSION, API_CONFIG, RETRY_CONFIG, HTTP_HEADERS } from "./constants/constants";
@@ -12,11 +11,6 @@ export interface CMSConfig {
   apiKey: string;
   /** Base URL for the CMS API */
   baseUrl?: string;
-  /**
-   * Optional timeout in milliseconds for HTTP requests.
-   * This is implemented using AbortController around the native fetch API.
-   */
-  timeout?: number;
   /** Maximum number of retry attempts for transient failures */
   maxRetries?: number;
   /** Base delay (in ms) between retries for transient failures */
@@ -33,8 +27,6 @@ export interface CMSConfig {
  * Per-request options that can override default SDK configuration
  */
 export interface RequestOptions {
-  /** Override timeout for this specific request */
-  timeout?: number;
   /** Override max retries for this specific request */
   maxRetries?: number;
   /** Override retry delay for this specific request */
@@ -89,8 +81,7 @@ export class CMS {
       basePath,
       accessToken: config.apiKey,
       baseOptions: {
-        // Ensure generated client uses the same timeout & headers
-        timeout: config.timeout ?? DEFAULT_TIMEOUT_MS,
+        timeout: DEFAULT_TIMEOUT_MS,
         headers: {
           'Content-Type': 'application/json',
           'X-CMS-SDK-Version': SDK_VERSION,
@@ -210,20 +201,6 @@ export class CMS {
     return Math.min(exponentialBase + jitter, retryMaxDelayMs);
   }
 
-  private toGeneratedRequestOptions(options?: RequestOptions): GeneratedRequestOptions | undefined {
-    if (!options) {
-      return undefined;
-    }
-
-    const requestOptions: GeneratedRequestOptions = {};
-
-    if (typeof options.timeout === "number") {
-      requestOptions.timeout = options.timeout;
-    }
-
-    return requestOptions;
-  }
-
   private async withRetry<T>(fn: () => Promise<T>, options?: RequestOptions): Promise<T> {
     let attempt = 0;
 
@@ -299,11 +276,9 @@ export class CMS {
       throw new Error(`CMS SDK: Invalid lead data - ${message}`);
     }
 
-    const requestOptions = this.toGeneratedRequestOptions(options);
-
     return this.withRetry(
       async () => {
-        return this.events.trackLead(leadData, requestOptions);
+        return this.events.trackLead(leadData);
       },
       options
     );
@@ -318,11 +293,9 @@ export class CMS {
       throw new Error(`CMS SDK: Invalid sale data - ${message}`);
     }
 
-    const requestOptions = this.toGeneratedRequestOptions(options);
-
     return this.withRetry(
       async () => {
-        return this.events.trackSale(saleData, requestOptions);
+        return this.events.trackSale(saleData);
       },
       options
     );

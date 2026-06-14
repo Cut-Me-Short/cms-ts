@@ -15,8 +15,8 @@ export const API_CONFIG = {
   /** Default base URL for the CMS API */
   BASE_URL: "https://www.api.cme.sh",
 
-  /** Default timeout in milliseconds for HTTP requests */
-  TIMEOUT_MS: 10_000,
+  /** Internal request timeout in milliseconds (not user-configurable) */
+  TIMEOUT_MS: 60_000,
 } as const;
 
 // ============================================================================
@@ -47,12 +47,6 @@ export const VALIDATION_CONSTRAINTS = {
   API_KEY: {
     /** Regex pattern for valid API keys: must be 20+ alphanumeric chars */
     PATTERN: /^[a-zA-Z0-9_]{20,}$/,
-  },
-
-  // Timeout constraints
-  TIMEOUT: {
-    MIN_MS: 1000,
-    MAX_MS: 60000,
   },
 
   // Max retries constraints
@@ -125,10 +119,6 @@ export const ERROR_MESSAGES = {
 
   // Base URL errors
   BASE_URL_INVALID: "baseUrl must be a valid absolute URL",
-
-  // Timeout errors
-  TIMEOUT_TOO_LOW: `timeout must be at least ${VALIDATION_CONSTRAINTS.TIMEOUT.MIN_MS}ms`,
-  TIMEOUT_TOO_HIGH: `timeout must not exceed ${VALIDATION_CONSTRAINTS.TIMEOUT.MAX_MS}ms`,
 
   // Max retries errors
   MAX_RETRIES_NEGATIVE: "maxRetries must be non-negative",

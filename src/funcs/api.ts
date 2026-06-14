@@ -377,17 +377,22 @@ async function performFetchRequest<T>(requestArgs: RequestArgs, basePath: string
 
         return dataResult as T;
     } catch (err: any) {
-        // Normalize fetch/AbortError/network errors into an Axios-style shape
+        // Normalize fetch/AbortError/network errors into an Axios-style shape.
+        // DOMException (AbortError) exposes `code` as read-only, so copy into a plain Error.
+        let normalizedError: any = err;
         if (err?.name === "AbortError") {
-            err.code = "ECONNABORTED";
+            normalizedError = new Error(typeof err?.message === "string" ? err.message : "The operation was aborted");
+            normalizedError.name = "AbortError";
+            normalizedError.code = "ECONNABORTED";
+            normalizedError.cause = err;
         }
 
-        if (!err.response) {
+        if (!normalizedError.response) {
             // Attach only minimal request info to avoid leaking sensitive data
-            err.request = { url };
+            normalizedError.request = { url };
         }
 
-        throw err;
+        throw normalizedError;
     } finally {
         if (timeoutId) {
             clearTimeout(timeoutId);

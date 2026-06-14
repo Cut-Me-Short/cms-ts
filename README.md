@@ -45,7 +45,6 @@ import { CMS } from "cutmeshort";
 
 const cms = new CMS({
   apiKey: process.env.CMS_API_KEY!,
-  timeout: 10_000,
 });
 
 const response = await cms.trackLead({
@@ -147,7 +146,6 @@ await cms.trackLead(
     customerExternalId: "user_42",
   },
   {
-    timeout: 5000,
     maxRetries: 1,
     retryDelayMs: 300,
   }
@@ -238,7 +236,6 @@ import {
 // Config is validated at initialization
 const config: CMSConfig = {
   apiKey: process.env.CMS_API_KEY!,
-  timeout: 5000,
   maxRetries: 3,
 };
 
@@ -254,7 +251,6 @@ const leadPayload: LeadPayload = {
 
 // RequestOptions for per-call configuration
 const options: RequestOptions = {
-  timeout: 3000,
   maxRetries: 1,
 };
 

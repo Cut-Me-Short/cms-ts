@@ -13,12 +13,6 @@ export const CMSConfigSchema = z.object({
   apiKey: z
     .string()
     .optional(),
-  timeout: z
-    .number()
-    .int()
-    .min(VALIDATION_CONSTRAINTS.TIMEOUT.MIN_MS, ERROR_MESSAGES.TIMEOUT_TOO_LOW)
-    .max(VALIDATION_CONSTRAINTS.TIMEOUT.MAX_MS, ERROR_MESSAGES.TIMEOUT_TOO_HIGH)
-    .optional(),
   maxRetries: z
     .number()
     .int()

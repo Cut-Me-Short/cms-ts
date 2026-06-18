@@ -13,7 +13,7 @@ export const SDK_VERSION = "1.0.0";
 // ============================================================================
 export const API_CONFIG = {
   /** Default base URL for the CMS API */
-  BASE_URL: "https://www.api.cme.sh",
+  BASE_URL: "https://www.app.cutmeshort.com",
 
   /** Internal request timeout in milliseconds (not user-configurable) */
   TIMEOUT_MS: 60_000,
